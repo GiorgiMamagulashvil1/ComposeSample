@@ -7,6 +7,8 @@ import androidx.navigation.compose.composable
 import com.gm.composesample.screen.MainScreen
 import com.gm.composesample.screen.sub_screens.LazyColumnScreen
 import com.gm.composesample.screen.sub_screens.LazyRowScreen
+import com.gm.composesample.screen.sub_screens.ModalBottomSheetScreen
+import com.gm.composesample.screen.sub_screens.PagerScreen
 
 @Composable
 fun SetUpNavGraph(
@@ -21,6 +23,12 @@ fun SetUpNavGraph(
         }
         composable(route = Routes.LazyColumn.route) {
             LazyColumnScreen()
+        }
+        composable(route = Routes.ModalBottomSheet.route) {
+            ModalBottomSheetScreen()
+        }
+        composable(route = Routes.Pager.route) {
+            PagerScreen()
         }
     }
 }

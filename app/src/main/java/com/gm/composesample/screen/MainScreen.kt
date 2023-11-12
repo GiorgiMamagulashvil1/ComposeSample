@@ -35,7 +35,7 @@ fun MainScreen(
 ) {
     Column(Modifier.fillMaxSize()) {
         Spacer(modifier = Modifier.fillMaxHeight(0.04f))
-        Text(text = "My Fucking Compose Application", modifier = Modifier.align(CenterHorizontally))
+        Text(text = "My Compose Application", modifier = Modifier.align(CenterHorizontally))
         Spacer(modifier = Modifier.fillMaxHeight(0.05f))
 
         LazyColumn(
@@ -123,12 +123,12 @@ private val itemList = listOf(
     // TODO Qemo make route
     ItemModel(
         title = "Pager",
-        route = "lazy_row"
+        route = Routes.Pager.route
     ),
-    // TODO George make route
+    //tr
     ItemModel(
         title = "Bottom Sheet",
-        route = "lazy_row"
+        route = Routes.ModalBottomSheet.route
     ),
     // TODO Qemo make route
     ItemModel(
