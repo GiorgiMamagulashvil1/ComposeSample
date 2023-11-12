@@ -100,7 +100,6 @@ data class ItemModel(
 )
 
 private val itemList = listOf(
-    // TODO Qemo make route
     ItemModel(
         title = "Lazy Row",
         route = Routes.LazyRow.route
@@ -110,32 +109,29 @@ private val itemList = listOf(
         title = "Lazy Column",
         route = Routes.LazyColumn.route
     ),
-    // TODO Qemo Make route
     ItemModel(
         title = "Lazy Grid",
-        route = "lazy_row"
+        route = "lazy_grid"
     ),
     // TODO George make route
-    ItemModel(
-        title = "Lazy Staggered Grid",
-        route = "lazy_row"
-    ),
-    // TODO Qemo make route
     ItemModel(
         title = "Pager",
         route = Routes.Pager.route
     ),
-    //tr
     ItemModel(
         title = "Bottom Sheet",
+        route = Routes.BottomSheet.route
+    ),
+    ItemModel(
+        title = "Modal Bottom Sheet",
         route = Routes.ModalBottomSheet.route
     ),
-    // TODO Qemo make route
+    // TODO George make route
     ItemModel(
         title = "Dialog",
         route = "lazy_row"
     ),
-    // TODO George make route
+    // TODO Qemo make route
     ItemModel(
         title = "Simple Canvas",
         route = "lazy_row"
