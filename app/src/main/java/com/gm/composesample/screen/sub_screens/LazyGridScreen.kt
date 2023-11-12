@@ -46,24 +46,27 @@ fun LazyGrid() {
 @Composable
 private fun TextField(items: List<Int>, onItemSearch: (List<Int>) -> Unit) {
     var searchText by remember { mutableStateOf(TextFieldValue()) }
-    Column(modifier = Modifier.fillMaxWidth()) {
-        BasicTextField(
-            value = searchText,
-            onValueChange = {
-                searchText = it
-                onItemSearch.invoke(
-                    items.filter { number ->
-                        number.toString().contains(searchText.text, ignoreCase = true)
-                    }
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(55.dp)
-                .padding(16.dp)
-                .border(BorderStroke(width = 1.dp, color = Color.Black))
-        )
-    }
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        content = {
+            BasicTextField(
+                value = searchText,
+                onValueChange = {
+                    searchText = it
+                    onItemSearch.invoke(
+                        items.filter { number ->
+                            number.toString().contains(searchText.text, ignoreCase = true)
+                        }
+                    )
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(55.dp)
+                    .padding(16.dp)
+                    .border(BorderStroke(width = 1.dp, color = Color.Black))
+            )
+        }
+    )
 }
 
 @Composable
@@ -73,12 +76,13 @@ private fun LazyGridView(items: List<Int>) {
             columns = GridCells.Fixed(3),
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            items(items) { item ->
-                GridItem(item)
+                .padding(16.dp),
+            content = {
+                items(items) { item ->
+                    GridItem(item)
+                }
             }
-        }
+        )
     }
 }
 

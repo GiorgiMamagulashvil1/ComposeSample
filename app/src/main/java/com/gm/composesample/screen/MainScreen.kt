@@ -113,22 +113,21 @@ private val itemList = listOf(
         title = "Lazy Grid",
         route = "lazy_grid"
     ),
-    // TODO Qemo make route
+    // TODO George make route
     ItemModel(
         title = "Pager",
         route = "lazy_row"
     ),
-    // TODO George make route
     ItemModel(
         title = "Bottom Sheet",
-        route = "lazy_row"
+        route = Routes.BottomSheet.route
     ),
-    // TODO Qemo make route
+    // TODO George make route
     ItemModel(
         title = "Dialog",
         route = "lazy_row"
     ),
-    // TODO George make route
+    // TODO Qemo make route
     ItemModel(
         title = "Simple Canvas",
         route = "lazy_row"

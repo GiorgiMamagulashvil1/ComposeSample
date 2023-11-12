@@ -5,5 +5,7 @@ sealed class Routes(val route: String) {
     object LazyRow : Routes("lazy_row")
     object LazyColumn : Routes("lazy_column")
 
+    object BottomSheet: Routes("bottom_sheet")
+
     object LazyGrid : Routes("lazy_grid")
 }
