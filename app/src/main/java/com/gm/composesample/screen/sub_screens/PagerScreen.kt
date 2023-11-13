@@ -18,21 +18,27 @@ import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gm.composesample.R
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun PagerScreen() {
     val showPagerOne = remember {
@@ -57,6 +63,9 @@ fun PagerScreen() {
         R.drawable.animal_domestic_face_3_svgrepo_com,
         R.drawable.animal_domestic_pet_12_svgrepo_com
     )
+    val scope = rememberCoroutineScope()
+
+    // Content
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(modifier = Modifier.height(20.dp))
         Text(text = "Pager Screen")
@@ -84,54 +93,77 @@ fun PagerScreen() {
             }
         }
         Spacer(modifier = Modifier.height(30.dp))
+
+        AlertDialog(onDismissRequest = { /*TODO*/ }) {
+
+        }
+        // Horizontal Pager Ui
         AnimatedVisibility(visible = showPagerOne.value) {
-            HorizontalPager(
-                pageSize = object : PageSize {
-                    override fun Density.calculateMainAxisPageSize(
-                        availableSpace: Int,
-                        pageSpacing: Int
-                    ): Int {
-                        return ((availableSpace - 3 * pageSpacing) * 0.5f).toInt()
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .height(200.dp),
-                state = pageState,
-                pageSpacing = 20.dp
-            ) {
-                Image(
+            Column (horizontalAlignment = Alignment.CenterHorizontally){
+                Text(text = "Horizontal Pager")
+                Spacer(modifier = Modifier.height(10.dp))
+                HorizontalPager(
+                    pageSize = PageSize.Fixed(200.dp),
                     modifier = Modifier
-                        .background(Color.Cyan)
-                        .clip(RoundedCornerShape(8.dp)),
-                    painter = painterResource(id = data[it]),
-                    contentDescription = ""
-                )
+                        .fillMaxWidth(0.8f)
+                        .height(200.dp),
+                    state = pageState,
+                    pageSpacing = 20.dp
+                ) {
+                    Text(text = "${it + 1}", fontSize = 21.sp, fontWeight = FontWeight.Bold)
+                    Image(
+                        modifier = Modifier
+                            .background(Color.Cyan)
+                            .clip(RoundedCornerShape(18.dp)),
+                        painter = painterResource(id = data[it]),
+                        contentDescription = ""
+                    )
+                }
+                Spacer(modifier = Modifier.height(30.dp))
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp)
+                        .fillMaxWidth()
+                ) {
+                    Button(onClick = { scope.launch { pageState.animateScrollToPage(4) } }) {
+                        Text(text = "#5 ", fontSize = 21.sp, fontWeight = FontWeight.Bold)
+                    }
+                    Button(onClick = { scope.launch { pageState.animateScrollToPage(0) } }) {
+                        Text(text = "#1 ", fontSize = 21.sp, fontWeight = FontWeight.Bold)
+                    }
+                }
             }
         }
+
+        // Vertical Pager Ui
         AnimatedVisibility(visible = showPagerTwo.value) {
-            VerticalPager(
-                pageSize = object : PageSize {
-                    override fun Density.calculateMainAxisPageSize(
-                        availableSpace: Int,
-                        pageSpacing: Int
-                    ): Int {
-                        return ((availableSpace - 2 * pageSpacing) * 0.5f).toInt()
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .aspectRatio(1f),
-                state = verticalPagerState,
-                pageSpacing = 20.dp
-            ) {
-                Image(
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "Vertical Pager")
+                Spacer(modifier = Modifier.height(10.dp))
+                VerticalPager(
+                    pageSize = object : PageSize {
+                        override fun Density.calculateMainAxisPageSize(
+                            availableSpace: Int,
+                            pageSpacing: Int
+                        ): Int {
+                            return ((availableSpace - 2 * pageSpacing) * 0.5f).toInt()
+                        }
+                    },
                     modifier = Modifier
-                        .background(Color.Yellow)
-                        .clip(RoundedCornerShape(8.dp)),
-                    painter = painterResource(id = data[it]),
-                    contentDescription = ""
-                )
+                        .fillMaxWidth(0.8f)
+                        .aspectRatio(1f),
+                    state = verticalPagerState,
+                    pageSpacing = 20.dp
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .background(Color.Yellow)
+                            .clip(RoundedCornerShape(8.dp)),
+                        painter = painterResource(id = data[it]),
+                        contentDescription = ""
+                    )
+                }
             }
         }
     }

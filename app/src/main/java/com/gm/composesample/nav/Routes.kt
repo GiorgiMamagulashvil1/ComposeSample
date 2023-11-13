@@ -8,4 +8,5 @@ sealed class Routes(val route: String) {
     object LazyGrid : Routes("lazy_grid")
     object ModalBottomSheet: Routes("modal_bottom_sheet")
     object Pager: Routes("pager")
+    object Dialog: Routes("dialog")
 }
