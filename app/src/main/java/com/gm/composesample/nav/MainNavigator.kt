@@ -12,6 +12,7 @@ import com.gm.composesample.screen.sub_screens.LazyGrid
 import com.gm.composesample.screen.sub_screens.LazyRowScreen
 import com.gm.composesample.screen.sub_screens.ModalBottomSheetScreen
 import com.gm.composesample.screen.sub_screens.PagerScreen
+import com.gm.composesample.screen.sub_screens.TypoScreen
 
 @Composable
 fun SetUpNavGraph(
@@ -41,6 +42,9 @@ fun SetUpNavGraph(
         }
         composable(route = Routes.Dialog.route) {
             DialogScreen()
+        }
+        composable(route = Routes.Typo.route) {
+            TypoScreen()
         }
     }
 }

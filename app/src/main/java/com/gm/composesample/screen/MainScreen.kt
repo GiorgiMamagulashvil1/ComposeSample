@@ -133,7 +133,7 @@ private val itemList = listOf(
     ),
     // TODO Qemo make route
     ItemModel(
-        title = "Simple Canvas",
-        route = "lazy_row"
+        title = "Typo",
+        route = Routes.Typo.route
     ),
 )

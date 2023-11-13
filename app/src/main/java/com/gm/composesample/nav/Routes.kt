@@ -9,4 +9,5 @@ sealed class Routes(val route: String) {
     object ModalBottomSheet: Routes("modal_bottom_sheet")
     object Pager: Routes("pager")
     object Dialog: Routes("dialog")
+    object Typo: Routes("typo")
 }
