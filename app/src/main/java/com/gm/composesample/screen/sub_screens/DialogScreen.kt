@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
@@ -36,6 +37,9 @@ fun DialogScreen() {
     val showDialog = remember {
         mutableStateOf(false)
     }
+    val showAlertDialog = remember {
+        mutableStateOf(false)
+    }
     val arcColor = remember {
         mutableStateOf(Color.Black)
     }
@@ -46,12 +50,26 @@ fun DialogScreen() {
         Button(onClick = { showDialog.value = true }, modifier = Modifier.padding(10.dp)) {
             Text(text = "Open Dialog")
         }
+        Button(onClick = { showAlertDialog.value = true }, modifier = Modifier.padding(10.dp)) {
+            Text(text = "Open Alert Dialog")
+        }
 
         if (showDialog.value) {
             RenderDialogUI(
                 onDismiss = {
                     showDialog.value = false
                     arcColor.value = it
+                }
+            )
+        }
+
+        if (showAlertDialog.value) {
+            RenderAlertDialogUI(
+                onDismiss = {
+                    showAlertDialog.value = false
+                },
+                onConfirm = {
+                    showAlertDialog.value = false
                 }
             )
         }
@@ -83,78 +101,107 @@ private fun RenderDialogUI(
         properties = DialogProperties(
             dismissOnBackPress = false,
             dismissOnClickOutside = false,
-        )
-    ) {
-        Surface(shape = RoundedCornerShape(16.dp), color = Color.White) {
-            Box(contentAlignment = Alignment.Center) {
-                Column(
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.padding(20.dp)
-                ) {
-                    Text(text = "Color Palette")
-                    Spacer(modifier = Modifier.height(30.dp))
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
+        ),
+        content = {
+            Surface(shape = RoundedCornerShape(16.dp), color = Color.White) {
+                Box(contentAlignment = Alignment.Center) {
+                    Column(
+                        verticalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.padding(20.dp)
                     ) {
-                        Button(
-                            onClick = {
-                                onDismiss.invoke(Color.Cyan)
-                            },
-                            modifier = Modifier
-                                .size(30.dp)
-                                .background(
-                                    Color.Transparent
-                                )
-                                .clip(CircleShape),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.Cyan)
+                        Text(text = "Color Palette")
+                        Spacer(modifier = Modifier.height(30.dp))
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier.fillMaxWidth()
                         ) {
+                            Button(
+                                onClick = {
+                                    onDismiss.invoke(Color.Cyan)
+                                },
+                                modifier = Modifier
+                                    .size(30.dp)
+                                    .background(
+                                        Color.Transparent
+                                    )
+                                    .clip(CircleShape),
+                                colors = ButtonDefaults.buttonColors(containerColor = Color.Cyan)
+                            ) {
 
-                        }
-                        Button(
-                            onClick = {
-                                onDismiss.invoke(Color.Red)
-                            }, modifier = Modifier
-                                .size(30.dp)
-                                .background(
-                                    Color.Transparent
-                                )
-                                .clip(CircleShape),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                            }
+                            Button(
+                                onClick = {
+                                    onDismiss.invoke(Color.Red)
+                                }, modifier = Modifier
+                                    .size(30.dp)
+                                    .background(
+                                        Color.Transparent
+                                    )
+                                    .clip(CircleShape),
+                                colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
 
-                        ) {
+                            ) {
 
-                        }
-                        Button(
-                            onClick = {
-                                onDismiss.invoke(Color.Green)
-                            }, modifier = Modifier
-                                .size(30.dp)
-                                .background(
-                                    Color.Transparent
-                                )
-                                .clip(CircleShape),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
+                            }
+                            Button(
+                                onClick = {
+                                    onDismiss.invoke(Color.Green)
+                                }, modifier = Modifier
+                                    .size(30.dp)
+                                    .background(
+                                        Color.Transparent
+                                    )
+                                    .clip(CircleShape),
+                                colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
 
-                        ) {
+                            ) {
 
-                        }
-                        Button(
-                            onClick = {
-                                onDismiss.invoke(Color.Yellow)
-                            }, modifier = Modifier
-                                .size(30.dp)
-                                .background(
-                                    Color.Transparent
-                                )
-                                .clip(CircleShape),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)
-                        ) {
+                            }
+                            Button(
+                                onClick = {
+                                    onDismiss.invoke(Color.Yellow)
+                                }, modifier = Modifier
+                                    .size(30.dp)
+                                    .background(
+                                        Color.Transparent
+                                    )
+                                    .clip(CircleShape),
+                                colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)
+                            ) {
 
+                            }
                         }
                     }
                 }
             }
         }
-    }
+    )
+}
+
+@Composable
+private fun RenderAlertDialogUI(
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = {
+            onDismiss.invoke()
+        },
+        title = { Text("Alert Dialog Title") },
+        text = { Text("Dialog content goes here.") },
+        confirmButton = {
+            Button(onClick = {
+                onConfirm.invoke()
+            }) {
+                Text("OK")
+            }
+        },
+        dismissButton = {
+            Button(onClick = {
+                onDismiss.invoke()
+            }) {
+                Text("Cancel")
+            }
+        }
+    )
 }
