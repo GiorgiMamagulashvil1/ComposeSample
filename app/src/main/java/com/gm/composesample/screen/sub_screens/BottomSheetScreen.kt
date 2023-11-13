@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.BottomSheetScaffoldDefaults
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.Button
 import androidx.compose.material.ExperimentalMaterialApi
@@ -81,7 +80,7 @@ fun BottomSheetScreen() {
             LazyGridView(items)
         },
         sheetBackgroundColor = Color.LightGray,
-        sheetPeekHeight = 0.dp,
+        sheetPeekHeight = 30.dp,
         sheetShape = RoundedCornerShape(20.dp)
     )
 }

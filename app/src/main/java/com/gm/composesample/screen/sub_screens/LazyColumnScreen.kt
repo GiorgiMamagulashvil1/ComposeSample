@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -306,7 +307,7 @@ private fun UserInActiveItem(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier.height(60.dp),
+        modifier = modifier.height(80.dp),
         shape = RoundedCornerShape(12.dp)
     ) {
         Row(
@@ -325,7 +326,7 @@ private fun UserInActiveItem(
             Column(
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = item.username, fontStyle = FontStyle.Normal)
+                Text(text = item.username, style = MaterialTheme.typography.bodySmall, fontSize = 21.sp)
                 Spacer(modifier = Modifier.height(7.dp))
                 Text(
                     text = ".InActive",
@@ -363,7 +364,7 @@ private fun UserActiveItem(
             Column(
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = item.username, fontStyle = FontStyle.Normal)
+                Text(text = item.username, style = MaterialTheme.typography.bodySmall, fontSize = 21.sp)
                 Spacer(modifier = Modifier.height(7.dp))
                 Text(
                     text = ".Active",

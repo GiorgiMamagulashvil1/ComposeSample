@@ -88,7 +88,7 @@ fun PagerScreen() {
                     showPagerTwo.value = true
                 }
             ) {
-                Text(text = "Pager 1")
+                Text(text = "Pager 2")
             }
         }
         Spacer(modifier = Modifier.height(30.dp))
